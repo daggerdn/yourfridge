@@ -3,10 +3,7 @@ package pl.devnowak.yourfridge.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.devnowak.yourfridge.entity.Product;
 import pl.devnowak.yourfridge.entity.ProductCategory;
 import pl.devnowak.yourfridge.model.ProductRepository;
@@ -47,5 +44,13 @@ public class ProductController {
     public String displayRemoveProductsPage(Model model) {
         model.addAttribute("products", productRepository.findAll());
         return "product/removeProduct";
+    }
+
+    @PostMapping("remove")
+    public String removeProduct(@RequestParam Long[] productIds) {
+        for (Long productId : productIds) {
+            productRepository.deleteById(productId);
+        }
+        return "redirect:";
     }
 }
