@@ -43,4 +43,9 @@ public class ProductController {
         return "redirect:";
     }
 
+    @GetMapping("remove")
+    public String displayRemoveProductsPage(Model model) {
+        model.addAttribute("products", productRepository.findAll());
+        return "product/removeProduct";
+    }
 }
