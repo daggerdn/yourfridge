@@ -7,10 +7,10 @@
 <body>
 <h1>My Products</h1>
 <nav th:replace="template :: menu"></nav>
-
+<br />
 <p th:unless="${products} and ${products.size()}">Empty product list</p>
 
-<table>
+<table border="solid 1px">
     <tr>
         <th>Name</th>
         <th>Expiration Date</th>
