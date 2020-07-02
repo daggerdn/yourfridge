@@ -5,6 +5,28 @@
     <title>My products</title>
 </head>
 <body>
+<h1>My Products</h1>
+<a href="/product">List of products</a>
 
+<p th:unless="${products} and ${products.size()}">Empty product list</p>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Expiration Date</th>
+        <th>Day of Purchase</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Shop</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.expirationDate}"></td>
+        <td th:text="${product.dayOfPurchase}"></td>
+        <td th:text="${product.category}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.shop}"></td>
+    </tr>
+</table>
 </body>
 </html>
