@@ -7,32 +7,31 @@
 <body>
 <h1>Add Product</h1>
 <nav th:replace="template :: menu"></nav>
-
+<br />
 <form method="post" th:object="${product}">
-    <label th:for="name">Name</label>
-    <input th:field="*{name}"/>
+    <label th:for="name">Name</label><br />
+    <input th:field="*{name}"/><br />
 
-    <label th:for="expirationDate">Expiration date</label>
-    <input type="date" th:field="*{expirationDate}"/>
+    <label th:for="expirationDate">Expiration date</label><br />
+    <input type="date" th:field="*{expirationDate}"/><br />
 
-    <label th:for="dayOfPurchase">Day of purchase</label>
-    <input type="date" th:field="*{dayOfPurchase}"/>
+    <label th:for="dayOfPurchase">Day of purchase</label><br />
+    <input type="date" th:field="*{dayOfPurchase}"/><br />
 
-    <label th:for="category">Category</label>
+    <label th:for="category">Category</label><br />
     <select th:field="*{category}">
         <option th:each="productCategory : ${productCategories}"
                 th:text="${productCategory.productCategory}"
                 th:value="${productCategory}">
         </option>
-    </select>
+    </select><br />
 
-    <label th:for="price">Price</label>
-    <input th:field="*{price}"/>
+    <label th:for="price">Price</label><br />
+    <input th:field="*{price}"/><br />
 
-    <label th:for="shop">Shop</label>
-    <input th:field="*{shop}"/>
-
-    </div>
+    <label th:for="shop">Shop</label><br />
+    <input th:field="*{shop}"/><br />
+    
     <input type="submit" value="Add Product"/>
 </form>
 
