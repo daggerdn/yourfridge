@@ -6,8 +6,7 @@
 </head>
 <body>
 <h1>Add Product</h1>
-<a href="/product">List of products</a>
-<a href="/product/add">Add Product</a>
+<nav th:replace="template :: menu"></nav>
 
 <form method="post" th:object="${product}">
     <label th:for="name">Name</label>
