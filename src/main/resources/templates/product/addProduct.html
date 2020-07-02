@@ -9,5 +9,33 @@
 <a href="/product">List of products</a>
 <a href="/product/add">Add Product</a>
 
+<form method="post" th:object="${product}">
+    <label th:for="name">Name</label>
+    <input th:field="*{name}"/>
+
+    <label th:for="expirationDate">Expiration date</label>
+    <input th:field="*{expirationDate}"/>
+
+    <label th:for="dayOfPurchase">Day of purchase</label>
+    <input th:field="*{dayOfPurchase}"/>
+
+    <label th:for="category">Category</label>
+    <select th:field="*{category}">
+        <option th:each="productCategory : ${productCategories}"
+                th:text="${productCategory.productCategory}"
+                th:value="${productCategory}">
+        </option>
+    </select>
+
+    <label th:for="price">Price</label>
+    <input th:field="*{price}"/>
+
+    <label th:for="shop">Shop</label>
+    <input th:field="*{shop}"/>
+
+    </div>
+    <input type="submit" value="Add Product"/>
+</form>
+
 </body>
 </html>
