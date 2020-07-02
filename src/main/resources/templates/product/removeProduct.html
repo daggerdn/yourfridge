@@ -2,9 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title></title>
+    <title>Remove Product</title>
 </head>
 <body>
+<h1>Remove Product</h1>
 
+<nav th:replace="template :: menu"></nav>
+
+<form method="post">
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Expiration Date</th>
+            <th>Day of Purchase</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td><input type="checkbox" name="productIds" th:value="${product.id}" th:id="${product.id}"/></td>
+            <td><label th:for="${product.id}" th:text="${product.name}"></label></td>
+            <td><label th:for="${product.id}" th:text="${product.expirationDate}"></label></td>
+            <td><label th:for="${product.id}" th:text="${product.dayOfPurchase}"></label></td>
+        </tr>
+    </table>
+    <input type="submit" value="Remove Product"/>
+</form>
 </body>
 </html> 
