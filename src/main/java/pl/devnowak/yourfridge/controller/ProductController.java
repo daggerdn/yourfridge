@@ -9,6 +9,9 @@ import pl.devnowak.yourfridge.entity.ProductCategory;
 import pl.devnowak.yourfridge.model.ProductRepository;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("product")
@@ -19,8 +22,16 @@ public class ProductController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-
-        model.addAttribute("products", productRepository.findAll());
+        List<Product> productList = productRepository.findAll();
+        List<Integer> periodList = new ArrayList<>();
+        for (Product productFromList : productList) {
+            Period periodBetweenDates = Period.between(LocalDate.now(),
+                    productFromList.getExpirationDate());
+            int daysUntilExpiration = periodBetweenDates.getDays();
+            periodList.add(daysUntilExpiration);
+        }
+        model.addAttribute("products", productList);
+        model.addAttribute("period", periodList);
 
         return "product/index";
     }
