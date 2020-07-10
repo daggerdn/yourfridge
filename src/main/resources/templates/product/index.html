@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <title>My products</title>
+
+    <style>
+        th, td {
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
 <h1>My Products</h1>
@@ -18,14 +25,16 @@
         <th>Category</th>
         <th>Price</th>
         <th>Shop</th>
+        <th>Days to Expiration</th>
     </tr>
-    <tr th:each="product : ${products}">
+    <tr th:each="product, prodStat  : ${products}">
         <td th:text="${product.name}"></td>
         <td th:text="${product.expirationDate}"></td>
         <td th:text="${product.dayOfPurchase}"></td>
         <td th:text="${product.category}"></td>
         <td th:text="${product.price}"></td>
         <td th:text="${product.shop}"></td>
+        <td id="daysUntilExpiration" th:text="${period.get(prodStat.index)}"></td>
     </tr>
 </table>
 </body>
