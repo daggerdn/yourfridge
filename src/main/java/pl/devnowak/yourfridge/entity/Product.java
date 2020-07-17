@@ -1,6 +1,10 @@
 package pl.devnowak.yourfridge.entity;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,9 +16,15 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Size(min=2, message = "Size must be minimum 2!")
     private String name;
+
+    @NotNull(message = "You must choose a date!")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dayOfPurchase;
     private ProductCategory category;
