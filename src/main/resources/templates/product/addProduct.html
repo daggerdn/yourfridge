@@ -10,10 +10,12 @@
 <br />
 <form method="post" th:object="${product}">
     <label th:for="name">Name</label><br />
-    <input th:field="*{name}"/><br />
+    <input th:field="*{name}"/>
+    <span th:errors="*{name}"></span><br />
 
     <label th:for="expirationDate">Expiration date</label><br />
-    <input type="date" th:field="*{expirationDate}"/><br />
+    <input type="date" th:field="*{expirationDate}"/>
+    <span th:errors="*{expirationDate}"></span><br />
 
     <label th:for="dayOfPurchase">Day of purchase</label><br />
     <input type="date" th:field="*{dayOfPurchase}"/><br />
@@ -31,7 +33,7 @@
 
     <label th:for="shop">Shop</label><br />
     <input th:field="*{shop}"/><br />
-    
+
     <input type="submit" value="Add Product"/>
 </form>
 
