@@ -27,8 +27,12 @@ public class Product {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dayOfPurchase;
+
+    @Enumerated(EnumType.STRING)
     private ProductCategory category;
+
     private double price;
+
     private String shop;
 
     public Product() {
