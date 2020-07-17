@@ -3,11 +3,13 @@ package pl.devnowak.yourfridge.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.devnowak.yourfridge.entity.Product;
 import pl.devnowak.yourfridge.entity.ProductCategory;
 import pl.devnowak.yourfridge.model.ProductRepository;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -45,8 +47,11 @@ public class ProductController {
     }
 
     @PostMapping("add")
-    public String addNewProduct(@ModelAttribute Product newProduct) {
-
+    public String addNewProduct(@ModelAttribute @Valid Product newProduct, Errors errors, Model model) {
+        if(errors.hasErrors()) {
+            model.addAttribute("productCategories", ProductCategory.values());
+            return "product/addProduct";
+        }
         productRepository.save(newProduct);
         return "redirect:";
     }
