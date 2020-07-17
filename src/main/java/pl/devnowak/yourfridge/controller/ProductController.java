@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.devnowak.yourfridge.entity.Product;
 import pl.devnowak.yourfridge.entity.ProductCategory;
 import pl.devnowak.yourfridge.model.ProductRepository;
+import pl.devnowak.yourfridge.model.ProductService;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -19,12 +20,16 @@ import java.util.List;
 @RequestMapping("product")
 public class ProductController {
 
+    private final ProductService productService;
+
     @Autowired
-    private ProductRepository productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        List<Product> productList = productRepository.findAll();
+        List<Product> productList = productService.getAllProducts();
         List<Integer> periodList = new ArrayList<>();
         for (Product productFromList : productList) {
             Period periodBetweenDates = Period.between(LocalDate.now(),
@@ -52,20 +57,20 @@ public class ProductController {
             model.addAttribute("productCategories", ProductCategory.values());
             return "product/addProduct";
         }
-        productRepository.save(newProduct);
+        productService.saveProduct(newProduct);
         return "redirect:";
     }
 
     @GetMapping("remove")
     public String displayRemoveProductsPage(Model model) {
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("products", productService.getAllProducts());
         return "product/removeProduct";
     }
 
     @PostMapping("remove")
     public String removeProduct(@RequestParam Long[] productIds) {
         for (Long productId : productIds) {
-            productRepository.deleteById(productId);
+            productService.deleteProductById(productId);
         }
         return "redirect:";
     }
